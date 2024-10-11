@@ -6,7 +6,9 @@
       :class="[colorClasses, innerClass]"
       v-bind="attrs"
     >
-      <slot />
+      <slot>
+        {{ props.text }}
+      </slot>
     </component>
   </li>
 </template>
@@ -25,6 +27,7 @@ const {class: wrapperClass, ...attrs} = useAttrs()
 const _props = withDefaults(defineProps<BDropdownTextProps>(), {
   innerClass: undefined,
   tag: 'span',
+  text: undefined,
   variant: null,
   wrapperAttrs: undefined,
 })
