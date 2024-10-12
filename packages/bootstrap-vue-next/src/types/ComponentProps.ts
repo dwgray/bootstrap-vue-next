@@ -117,6 +117,8 @@ export interface BDropdownDividerProps {
 
 export interface BDropdownFormProps {
   formClass?: ClassValue
+  novalidate?: boolean
+  validated?: boolean
   wrapperAttrs?: Readonly<AttrsValue>
 }
 
@@ -145,9 +147,9 @@ export interface BDropdownItemProps extends Omit<BLinkProps, 'routerTag'> {
 export interface BDropdownItemButtonProps {
   active?: boolean
   activeClass?: ClassValue
+  disabled?: boolean
   buttonClass?: ClassValue
   wrapperAttrs?: Readonly<AttrsValue>
-  disabled?: boolean
   variant?: ColorVariant | null
 }
 
