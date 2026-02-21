@@ -1,5 +1,113 @@
 # Changelog
 
+## [0.40.0](https://github.com/dwgray/bootstrap-vue-next/compare/nuxt-v0.43.6...nuxt-v0.40.0) (2026-02-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* **BTable:** change item details to expandedItems to make more linguistic sense. toggleDetails -> toggleExpansion, row-details slot to row-expansion. Linguistically, detailedItems as a modelValue didn't make sense as it implied content details information, rather than a rows expanded state. We renamed this for lingustical clarity, as well as symmetry with the similar selectedItems modelValue
+* **BTable:** selected items exposed utilities in the template ref are now under the selection key,
+* **BTable:** exposed selection utility functions names are more generic, to align with the newly exposed functions for expandedItems-- add, toggle, remove, clear, set, setAll, isActivated, get
+* **BTable:** itemDetails as a property on the items object is removed. Use the v-model instead. This allows you to programatically modify the v-model, rather than relying on mutating the source item object
+* **BTabs:** the activate-tab emit now emits a single argument, an object containing the data, rather than five separate arguments
+* **BTable:** emits now give out single argument objects, rather than four or so parameters
+* **BTable:** fix typo in btableLiteProps export to be bTableLiteProps
+* **BTable:** fix typo in btableProps export to be bTableProps
+* **BTable:** for field.key remove the ability to use nested string paths like name.firstName and instead require the use of a function via the accessor property. Root object paths for keys still work, optional accessor property takes precidence
+* **BTable:** field.key is not a simple string value
+* **BTable:** tableefieldformatter function now has a single parameter object instead of multiple parameters
+* **BTable:** TableField tdAttr now has a single parameter object instead of multiple parameters
+* **BTable:** TableField thAttr now has a single parameter object instead of multiple parameters
+* **BSort:** Implement initial-sort-direction and move compare from sort-by to fields ([#2777](https://github.com/dwgray/bootstrap-vue-next/issues/2777))
+* Merged the Orchestrator components into one.
+* renamed the controller composables to `useToast`, `useModal`, and `usePopover`
+* combined the old plugins to match the new BApp and composables.
+* the old `useModal` was removed since `useToggle` does all what it did.
+* new `BApp` component as the recommended way to configure bootstrap-vue-next applications, replacing the plugin-based approach.
+* **BTable:** fix a long standing regression in which the comparer function in btable did not give the item value, instead passing a string fixes #2565
+* **useToast:** rename useToast to useToastController fixes #2155
+* **BDropdown:** remove props center, dropend, dropstart, dropup, & end -- use single prop placement -- has same rules as popover. placement=top-start placement=bottom-start placement=right-start etc etc fixes #1752
+* **BProgress:** fix markup for BProgress to match bootstrap 5.3 recommended fixes #2221 . Manual intervention may not be needed, double check your aria markup (if manually configured), may be automatic
+
+### Features
+
+* **BDropdown:** remove props center, dropend, dropstart, dropup, & end -- use single prop placement -- has same rules as popover. placement=top-start placement=bottom-start placement=right-start etc etc fixes [#1752](https://github.com/dwgray/bootstrap-vue-next/issues/1752) ([e6749a3](https://github.com/dwgray/bootstrap-vue-next/commit/e6749a366aa839d2607c1aeba6b786e4e2299abf))
+* **BFormCheckbboxGroup:** spread the input object rather than el.props fixes [#2590](https://github.com/dwgray/bootstrap-vue-next/issues/2590) ([2c3970c](https://github.com/dwgray/bootstrap-vue-next/commit/2c3970ca3ed0c3d312600877c8ec0043a6834144))
+* **BFormRadioGroup:** spread the input object rather than el.props fixes [#2590](https://github.com/dwgray/bootstrap-vue-next/issues/2590) ([2c3970c](https://github.com/dwgray/bootstrap-vue-next/commit/2c3970ca3ed0c3d312600877c8ec0043a6834144))
+* **BImg:** add manual configuration support for NuxtImg and docs on how to ([78f330b](https://github.com/dwgray/bootstrap-vue-next/commit/78f330b115adf357fa2d80ee4264887531249e67))
+* **BLink:** add NuxtLink automatic support ([78f330b](https://github.com/dwgray/bootstrap-vue-next/commit/78f330b115adf357fa2d80ee4264887531249e67))
+* **BProgress:** fix markup for BProgress to match bootstrap 5.3 recommended fixes [#2221](https://github.com/dwgray/bootstrap-vue-next/issues/2221) . Manual intervention may not be needed, double check your aria markup (if manually configured), may be automatic ([e6749a3](https://github.com/dwgray/bootstrap-vue-next/commit/e6749a366aa839d2607c1aeba6b786e4e2299abf))
+* **BSort:** Implement initial-sort-direction and move compare from sort-by to fields ([#2777](https://github.com/dwgray/bootstrap-vue-next/issues/2777)) ([b3eec6e](https://github.com/dwgray/bootstrap-vue-next/commit/b3eec6eaabf654bb21124b9601d9c3809e5eb0cc))
+* **BTable:** add emptyText and emptyFilteredText functionality fixes [#664](https://github.com/dwgray/bootstrap-vue-next/issues/664) ([e6749a3](https://github.com/dwgray/bootstrap-vue-next/commit/e6749a366aa839d2607c1aeba6b786e4e2299abf))
+* **BTable:** add getFromPrimaryKey and resolvedItems in the selection and expansion template ref keys as utility funcs ([78f330b](https://github.com/dwgray/bootstrap-vue-next/commit/78f330b115adf357fa2d80ee4264887531249e67))
+* **BTable:** change item details to expandedItems to make more linguistic sense. toggleDetails -&gt; toggleExpansion, row-details slot to row-expansion. Linguistically, detailedItems as a modelValue didn't make sense as it implied content details information, rather than a rows expanded state. We renamed this for lingustical clarity, as well as symmetry with the similar selectedItems modelValue ([2a39525](https://github.com/dwgray/bootstrap-vue-next/commit/2a39525036bb39c37eb3f809232705b183413b53))
+* **BTable:** emits now give out single argument objects, rather than four or so parameters ([2a39525](https://github.com/dwgray/bootstrap-vue-next/commit/2a39525036bb39c37eb3f809232705b183413b53))
+* **BTable:** Enhanced BTableEmits and BTableProps to use readonly array types for better immutability ([2a39525](https://github.com/dwgray/bootstrap-vue-next/commit/2a39525036bb39c37eb3f809232705b183413b53))
+* **BTable:** export some more types that were not previously available ([2a39525](https://github.com/dwgray/bootstrap-vue-next/commit/2a39525036bb39c37eb3f809232705b183413b53))
+* **BTable:** exposed selection utility functions names are more generic, to align with the newly exposed functions for expandedItems-- add, toggle, remove, clear, set, setAll, isActivated, get ([2a39525](https://github.com/dwgray/bootstrap-vue-next/commit/2a39525036bb39c37eb3f809232705b183413b53))
+* **BTable:** field.key is not a simple string value ([2a39525](https://github.com/dwgray/bootstrap-vue-next/commit/2a39525036bb39c37eb3f809232705b183413b53))
+* **BTable:** fix typo in btableLiteProps export to be bTableLiteProps ([2a39525](https://github.com/dwgray/bootstrap-vue-next/commit/2a39525036bb39c37eb3f809232705b183413b53))
+* **BTable:** fix typo in btableProps export to be bTableProps ([2a39525](https://github.com/dwgray/bootstrap-vue-next/commit/2a39525036bb39c37eb3f809232705b183413b53))
+* **BTable:** for field.key remove the ability to use nested string paths like name.firstName and instead require the use of a function via the accessor property. Root object paths for keys still work, optional accessor property takes precidence ([2a39525](https://github.com/dwgray/bootstrap-vue-next/commit/2a39525036bb39c37eb3f809232705b183413b53))
+* **BTable:** for table fields, add an optional accessor property, this can be a string value that is a property key on the prop.item object for keys that are at the root of the object. For more complex, nested keys, use the function getter style ([2a39525](https://github.com/dwgray/bootstrap-vue-next/commit/2a39525036bb39c37eb3f809232705b183413b53))
+* **BTable:** itemDetails as a property on the items object is removed. Use the v-model instead. This allows you to programatically modify the v-model, rather than relying on mutating the source item object ([2a39525](https://github.com/dwgray/bootstrap-vue-next/commit/2a39525036bb39c37eb3f809232705b183413b53))
+* **BTable:** primary key we no longer use the less known dot syntax for getting the value from the item object. NOw, use functional syntax for the primary key prop ([2a39525](https://github.com/dwgray/bootstrap-vue-next/commit/2a39525036bb39c37eb3f809232705b183413b53))
+* **BTable:** primary key will effect selectedItems and expandedItems. Modifying the primary key prop will clear these models ([2a39525](https://github.com/dwgray/bootstrap-vue-next/commit/2a39525036bb39c37eb3f809232705b183413b53))
+* **BTable:** selected items exposed utilities in the template ref are now under the selection key, ([2a39525](https://github.com/dwgray/bootstrap-vue-next/commit/2a39525036bb39c37eb3f809232705b183413b53))
+* **BTable:** tableefieldformatter function now has a single parameter object instead of multiple parameters ([2a39525](https://github.com/dwgray/bootstrap-vue-next/commit/2a39525036bb39c37eb3f809232705b183413b53))
+* **BTable:** TableField tdAttr now has a single parameter object instead of multiple parameters ([2a39525](https://github.com/dwgray/bootstrap-vue-next/commit/2a39525036bb39c37eb3f809232705b183413b53))
+* **BTable:** TableField thAttr now has a single parameter object instead of multiple parameters ([2a39525](https://github.com/dwgray/bootstrap-vue-next/commit/2a39525036bb39c37eb3f809232705b183413b53))
+* **BTabs:** the activate-tab emit now emits a single argument, an object containing the data, rather than five separate arguments ([2a39525](https://github.com/dwgray/bootstrap-vue-next/commit/2a39525036bb39c37eb3f809232705b183413b53))
+* combined the old plugins to match the new BApp and composables. ([ba90f59](https://github.com/dwgray/bootstrap-vue-next/commit/ba90f596ad3376ebddda535bf8b88232c60befff))
+* Merged the Orchestrator components into one. ([ba90f59](https://github.com/dwgray/bootstrap-vue-next/commit/ba90f596ad3376ebddda535bf8b88232c60befff))
+* new `BApp` component as the recommended way to configure bootstrap-vue-next applications, replacing the plugin-based approach.  ([ba90f59](https://github.com/dwgray/bootstrap-vue-next/commit/ba90f596ad3376ebddda535bf8b88232c60befff))
+* **PluginControllers:** Allow for using the prop.id for the items key. Ie if you supply modalController.show({props: {id: 'foo' }}) You can reference it leave('foo') ([e6749a3](https://github.com/dwgray/bootstrap-vue-next/commit/e6749a366aa839d2607c1aeba6b786e4e2299abf))
+* renamed the controller composables to `useToast`, `useModal`, and `usePopover` ([ba90f59](https://github.com/dwgray/bootstrap-vue-next/commit/ba90f596ad3376ebddda535bf8b88232c60befff))
+* the old `useModal` was removed since `useToggle` does all what it did. ([ba90f59](https://github.com/dwgray/bootstrap-vue-next/commit/ba90f596ad3376ebddda535bf8b88232c60befff))
+* **usePopoverController:** create usePopoverController composable (not fully complete) ([e6749a3](https://github.com/dwgray/bootstrap-vue-next/commit/e6749a366aa839d2607c1aeba6b786e4e2299abf))
+* **useToast:** rename useToast to useToastController fixes [#2155](https://github.com/dwgray/bootstrap-vue-next/issues/2155) ([e6749a3](https://github.com/dwgray/bootstrap-vue-next/commit/e6749a366aa839d2607c1aeba6b786e4e2299abf))
+
+
+### Bug Fixes
+
+* **BAvatar:** avatar style getting literal Size values fixes [#2535](https://github.com/dwgray/bootstrap-vue-next/issues/2535) ([7621aad](https://github.com/dwgray/bootstrap-vue-next/commit/7621aad0000c9138983315630e35657c6eb97f08))
+* **BDropdown:** bdropdown when in button group has class btn-group fixes [#2025](https://github.com/dwgray/bootstrap-vue-next/issues/2025) ([e6749a3](https://github.com/dwgray/bootstrap-vue-next/commit/e6749a366aa839d2607c1aeba6b786e4e2299abf))
+* **BFormOptions*:** Fix prop inheritance and type safety ([#3016](https://github.com/dwgray/bootstrap-vue-next/issues/3016)) ([b842f34](https://github.com/dwgray/bootstrap-vue-next/commit/b842f34e48f0b4c6c9e5b603a623060c15c88239))
+* **BLink:** Link receiving / href when trying to use href prop fixes [#2434](https://github.com/dwgray/bootstrap-vue-next/issues/2434) ([#2438](https://github.com/dwgray/bootstrap-vue-next/issues/2438)) ([aea1798](https://github.com/dwgray/bootstrap-vue-next/commit/aea179881c27e429b1588a62844fd230ec36df0d))
+* **BLink:** nuxt should do full page reloads on to prop fixes [#2445](https://github.com/dwgray/bootstrap-vue-next/issues/2445) ([#2449](https://github.com/dwgray/bootstrap-vue-next/issues/2449)) ([cce9833](https://github.com/dwgray/bootstrap-vue-next/commit/cce9833ebd91bcfe1037ffb6422edfdc03389198))
+* **BTable:** b-table-sortable-column class not workign when is sortable ([2a39525](https://github.com/dwgray/bootstrap-vue-next/commit/2a39525036bb39c37eb3f809232705b183413b53))
+* **BTable:** busy slot behavior to match bootstrap-vue fixes [#1636](https://github.com/dwgray/bootstrap-vue-next/issues/1636) ([e6749a3](https://github.com/dwgray/bootstrap-vue-next/commit/e6749a366aa839d2607c1aeba6b786e4e2299abf))
+* **BTable:** cast formatted items to string fixes [#2227](https://github.com/dwgray/bootstrap-vue-next/issues/2227) ([e6749a3](https://github.com/dwgray/bootstrap-vue-next/commit/e6749a366aa839d2607c1aeba6b786e4e2299abf))
+* **BTable:** duplicate labels with both labelstacked and label fixes [#2608](https://github.com/dwgray/bootstrap-vue-next/issues/2608) ([0658251](https://github.com/dwgray/bootstrap-vue-next/commit/0658251e3a592835c89b829993ea874a54b4ae22))
+* **BTable:** fix a long standing regression in which the comparer function in btable did not give the item value, instead passing a string fixes [#2565](https://github.com/dwgray/bootstrap-vue-next/issues/2565) ([05d0b6e](https://github.com/dwgray/bootstrap-vue-next/commit/05d0b6ef7f2561683d06132354616933a0455307))
+* **BTableLite:** for cell() slots, items in the vslot would not take into account global defaults value ([2a39525](https://github.com/dwgray/bootstrap-vue-next/commit/2a39525036bb39c37eb3f809232705b183413b53))
+* **BTableLite:** stacked uses field key instead of defined label fixes [#2591](https://github.com/dwgray/bootstrap-vue-next/issues/2591) ([05d0b6e](https://github.com/dwgray/bootstrap-vue-next/commit/05d0b6ef7f2561683d06132354616933a0455307))
+* **BTable:** stacked mode when using breakpoint data-label not rendering fixes [#2595](https://github.com/dwgray/bootstrap-vue-next/issues/2595) ([2c3970c](https://github.com/dwgray/bootstrap-vue-next/commit/2c3970ca3ed0c3d312600877c8ec0043a6834144))
+* **BTable:** syncronous errors in provider function handled correctly and will stop loading animation ([2a39525](https://github.com/dwgray/bootstrap-vue-next/commit/2a39525036bb39c37eb3f809232705b183413b53))
+* **BTable:** type of row-clicked and head-clicked could possibly be a keyboardevent ([2a39525](https://github.com/dwgray/bootstrap-vue-next/commit/2a39525036bb39c37eb3f809232705b183413b53))
+* **BTable:** when cell tdAttr is a function do not overwrite the function when data label is active ([2a39525](https://github.com/dwgray/bootstrap-vue-next/commit/2a39525036bb39c37eb3f809232705b183413b53))
+* **nuxt:** module using wrong routerComponentName causing default a tag to do full page reloads ([#2465](https://github.com/dwgray/bootstrap-vue-next/issues/2465)) ([c737ec2](https://github.com/dwgray/bootstrap-vue-next/commit/c737ec255b8eb848a6711eea5383cbf20b002556))
+* **nuxt:** remove bridge:false ([2a39525](https://github.com/dwgray/bootstrap-vue-next/commit/2a39525036bb39c37eb3f809232705b183413b53))
+* **types:** built types file not being exported, this really only effects utilities that could benefit from the list of all components names ([2a39525](https://github.com/dwgray/bootstrap-vue-next/commit/2a39525036bb39c37eb3f809232705b183413b53))
+* update deps fixes [#2487](https://github.com/dwgray/bootstrap-vue-next/issues/2487) ([#2617](https://github.com/dwgray/bootstrap-vue-next/issues/2617)) ([5f4416e](https://github.com/dwgray/bootstrap-vue-next/commit/5f4416eaf644145cb3f454e051905a851b6a0091))
+* **useScrollLock:** file meant to be public not in the correct format leading to build errors ([2a39525](https://github.com/dwgray/bootstrap-vue-next/commit/2a39525036bb39c37eb3f809232705b183413b53))
+
+
+### Performance Improvements
+
+* **BFormSelect:** dont wrap a localValue proxy to modelValue to reduce extra computed ([2a39525](https://github.com/dwgray/bootstrap-vue-next/commit/2a39525036bb39c37eb3f809232705b183413b53))
+* **BTable:** use a single array.reduce instead of multiple verbose methods when iterating the items array. Reducing the total number of iterations fixes [#2404](https://github.com/dwgray/bootstrap-vue-next/issues/2404) ([7621aad](https://github.com/dwgray/bootstrap-vue-next/commit/7621aad0000c9138983315630e35657c6eb97f08))
+* use getter functions over computed in some cases ([34d2a8f](https://github.com/dwgray/bootstrap-vue-next/commit/34d2a8f850dd965100ccbbcd8c00f05baceb6caa))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * devDependencies
+    * bootstrap-vue-next bumped to 0.40.0
+  * peerDependencies
+    * bootstrap-vue-next bumped to 0.40.0
+
 ## [0.43.6](https://github.com/bootstrap-vue-next/bootstrap-vue-next/compare/nuxt-v0.43.5...nuxt-v0.43.6) (2026-02-20)
 
 
